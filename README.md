@@ -25,8 +25,13 @@ As of now, it is not hooked with collaborative classroom APIs. It fetches a set 
 :point_right: Visual representation for answered, unanswered and untouched questions</br>
 :point_right: Auto saves user responses </br>
 
-
 </br>
+
+## Here is a snapshot of the UI
+
+<img src="./src/assets/snapshot.png" alt="Vue.js" width="700" height="350"/>
+
+</br></br>
 
 
 ## Project setup
