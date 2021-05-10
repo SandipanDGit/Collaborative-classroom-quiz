@@ -2,11 +2,35 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
+import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue';
 import Header from './components/Header.vue';
 import QuestionArea from './components/QuestionArea.vue';
 import NavPanel from './components/NavPanel.vue';
 import QuestionAction from './components/QuestionAction.vue'
+import Home from './components/Home.vue'
+import Quiz from './components/Quiz.vue'
+import Feedback from './components/Feedback.vue'
+
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {
+            path: '/',
+            component: Home
+        },
+        {
+            path: '/quiz',
+            component: Quiz
+        },
+        {
+            path: '/feedback',
+            component: Feedback
+        }
+    ]
+})
+
 
 const store = createStore({
     /*  all the data lives here
@@ -119,6 +143,8 @@ const store = createStore({
  
 const app = createApp(App)
 app.use(store)
+
+app.use(router)
 
 app.component('page-header', Header)
 app.component('qarea', QuestionArea)

@@ -5,22 +5,23 @@
         <div id="options" class="row">
             <div class="col-7">
                 <div id="option1" class="row d-flex align-items-center">
-                    <input class="col-2" type="radio" name="option-radio" v-bind:checked="computedInput[0]" @input="updateChosenOption(1)">
-                    <div class="option col-10">{{ getAnswers[0] }}</div>
+                    <input class="col-1" type="radio" name="option-radio" v-bind:checked="computedInput[0]" @input="updateChosenOption(1)">
+                    <div class="option col-11">{{ getAnswers[0] }}</div>
                 </div>
                 <div id="option2" class="row d-flex align-items-center">
-                    <input class="col-2" type="radio" name="option-radio" v-bind:checked="computedInput[1]" @input="updateChosenOption(2)">
-                    <div class="option col-10">{{ getAnswers[1] }}</div>
+                    <input class="col-1" type="radio" name="option-radio" v-bind:checked="computedInput[1]" @input="updateChosenOption(2)">
+                    <div class="option col-11">{{ getAnswers[1] }}</div>
                 </div>
                 <div id="option3" class="row d-flex align-items-center">
-                    <input class="col-2" type="radio" name="option-radio" v-bind:checked="computedInput[2]" @input="updateChosenOption(3)">
-                    <div class="option col-10">{{ getAnswers[2] }}</div>
+                    <input class="col-1" type="radio" name="option-radio" v-bind:checked="computedInput[2]" @input="updateChosenOption(3)">
+                    <div class="option col-11">{{ getAnswers[2] }}</div>
                 </div>
                 <div id="option4" class="row d-flex align-items-center">
-                    <input class="col-2" type="radio" name="option-radio" v-bind:checked="computedInput[3]" @input="updateChosenOption(4)">
-                    <div class="option col-10">{{ getAnswers[3] }}</div>
+                    <input class="col-1" type="radio" name="option-radio" v-bind:checked="computedInput[3]" @input="updateChosenOption(4)">
+                    <div class="option col-11">{{ getAnswers[3] }}</div>
                 </div>
-                <div class="display">user's response: {{ optionSetter == -1 ? "unanswered" : optionSetter }}</div>
+                <br><br>
+                <div class="display">user's response: {{ optionSetter == -1 ? "NIL" : optionSetter }}</div>
                 <div class="display">correct answer: {{ getCorrectPosition + 1 }}</div>
             </div>
         </div>
@@ -109,19 +110,21 @@
 
 <style scoped>
     #qarea-wrap{
-        /* border: 1px solid red; */
         border-bottom: 1px solid lightgrey;
-        padding-left: 10px;
-        height: 84vh;
-        /* background-color: aquamarine; */
+        display: flex;
+        padding-left: 20px;
+        padding-top: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;        
         overflow-y: scroll;
     }
+    
     #qnumber{
         font-size: 1.2rem;
         font-weight: bold;
         color: #555;
-        display: flex;
-        align-items: center;
     }
     #qbody{
         font-size: 1rem;
@@ -139,6 +142,10 @@
     }
     div[class^="col"]{    /* col-* classes has default padding */
       padding: 0;
+    }
+    .row{
+        width: 100%;
+        margin: 0;
     }
     
 </style>

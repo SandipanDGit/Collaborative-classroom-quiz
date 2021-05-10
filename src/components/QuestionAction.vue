@@ -25,6 +25,9 @@ export default {
 
 
 <style scoped>
+#qaction-wrap{
+    padding-top: 3px;
+}
 
 .row{
     display: flex;
