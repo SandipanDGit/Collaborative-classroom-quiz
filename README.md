@@ -51,6 +51,17 @@ npm install
 npm run serve
 ```
 </br>
+
+## Available routes
+
++ ```localhost:8080/``` : Base route for the app. This also contains the homepage.
+
++ ```localhost:8080/quiz``` : Actual quiz page with countdown timer.
+
++ ```localhost:8080/feedback``` : Automatic navigation to this page upon completion of the quiz.
+
+
+</br></br>
 Development in progress, all features may not be functioning right now.
 
 ### Feel free to crack open an issue though, or drop general feedback.
