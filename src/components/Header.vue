@@ -1,12 +1,15 @@
 <template>
     <div id="header" class="container-fluid">
         <div id="header-row" class="row d-flex align-items-center">
-            <div id="title" class="col-5 d-flex justify-content-start"><h4>{{ title }}</h4></div>
-            <div id="timer" class="col-4 text-center">
+            <div id="title" class="col-4 d-flex justify-content-start"><h4>{{ title }}</h4></div>
+            <div id="timer" class="col-3 text-center">
                 <div id="counter" v-if="needCountdown" class="row d-flex justify-content-center">
-                    <div class="col-4 text-center h5">Time remaining</div>
+                    <div class="col-4 text-center h5">Time left</div>
                     <div id="countdown" class="col-4 text-center">{{ `${getMinutes} : ${getSeconds}` }}</div>
                 </div>
+            </div>
+            <div id="submit-button" class="col-2 text-center">
+                <button v-if="needSubmit" type="submit" class="btn btn-primary" @click.prevent="submit">Submit</button>
             </div>
             <div id="cred" class="col-3 text-center">{{ cred.name }}</div>
         </div>
@@ -23,7 +26,8 @@ export default {
             remaining: 0,
             cred: {
                 name: "Sandipan Dutta"
-            }
+            },
+            timer: null
         };
     },
     mounted(){
@@ -43,6 +47,9 @@ export default {
         needCountdown(){
             return this.$route.path == '/quiz'? true : false
         },
+        needSubmit(){
+            return this.$route.path == '/quiz'? true : false
+        },
         getMinutes(){
             return this.minutes
         },
@@ -53,15 +60,15 @@ export default {
     methods: {
         updateTime(){
             const startTime = Date.now()
-            const endTime = startTime + 30000    //30 sec
+            const endTime = startTime + (this.$store.getters.getQuestionCount * 60 * 1000)     //timer set as 1 minute time for each question
             this.remaining = endTime - startTime
             
-            const timer = setInterval(()=>{
+            this.timer = setInterval(()=>{
                 console.log(`remaining: ${this.remaining}`)
 
                 if(this.remaining <= 0){
                     console.log("timout!!!!!!")
-                    clearInterval(timer)
+                    clearInterval(this.timer)
                     this.$router.push('feedback')
                     return
                 }
@@ -71,6 +78,10 @@ export default {
                 this.minutes = Math.floor(this.remaining/ 60000)
                 
             }, 1000)
+        },
+        submit(){
+            clearInterval(this.timer)
+            this.$router.push('feedback')
         }
     }
     
@@ -78,7 +89,9 @@ export default {
 </script>
 
 <style>     /*  cant make this scoped. it breaks the UI*/
-    #header{     
+    #header{   
+        display: flex;
+        align-items: center;  
         min-height: 4.5rem;   
         background-color: #563D7C;
         color: white;
@@ -108,6 +121,16 @@ export default {
     #timer{
         border-left: 1px solid grey;
         border-right: 1px solid grey;
+    }
+    #submit-button{
+        border-right: 1px solid grey;
+    }
+    #submit-button>button{
+        width: 6rem;
+        font-size: 1.3rem;
+        background-color: white;
+        color: #563D7C;
+        font-weight: 600;
     }
     
 </style>

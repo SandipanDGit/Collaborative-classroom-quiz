@@ -1,7 +1,7 @@
 <template>
     <div id="nav-panel-wrap" class="container-fluid">
         <div id="nav-header" class="row text-center">NAVIGATION PANEL</div>
-        <div id="nav-body" class="row d-flex justify-content-center">
+        <div id="nav-body">
             <div id="nav-item1" class="col-3 answered">1</div>
             <div id="nav-item2" class="col-3 answered">2</div>
             <div id="nav-item3" class="col-3 skipped">3</div>
@@ -48,29 +48,26 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: #555;
     }
     #nav-body{
-        padding: 0;
+        padding: 1rem;
         height: 31rem !important;
         overflow-y: scroll;
-        
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
     }
     div[id^="nav-item"]     /* select div whose id starts with "nav-item" */
     { 
         border: 1px solid grey;
-        border-radius: 5px;
-        margin: .3rem;
-        min-width: 1rem;
-        min-height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #444;
+        margin: 0.2rem;
+        text-align: center;
+        
     }
 
     .answered{

@@ -12,7 +12,6 @@ import Home from './components/Home.vue'
 import Quiz from './components/Quiz.vue'
 import Feedback from './components/Feedback.vue'
 
-
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -41,7 +40,7 @@ const store = createStore({
         return {
             questions: [],
             dataFetched: false,
-            activeQ: 0
+            activeQ: null
         }
     },
     /*  all the functions on data goes here, like member functions of a class
@@ -62,7 +61,11 @@ const store = createStore({
                         answers: [],
                         correctPosition: 0,
                         answered: false,
-                        chosenOption: -1
+                        chosenOption: -1,
+                        locked: false,
+                        renderTime: null,
+                        responseTime: null,
+                        differenceInterval: null
                     }
 
                     //INJECTING THE CORRECT ANSWER IN RANDOM POSITION IN ARRAY
@@ -96,6 +99,9 @@ const store = createStore({
             })
         },//end of function 
         
+        setInitialActive(state){
+            state.activeQ = 0
+        },
         updateActive(state, offset){
             //only take care when going previous from 0th Q
             if(state.activeQ == 0 && offset == -1){
@@ -104,16 +110,42 @@ const store = createStore({
             else{
                 state.activeQ = (state.activeQ + offset) % state.questions.length
             }
-        },
+        }, 
         updateChosenOption(state, option){
             console.log("updating chosen option as", option)
             state.questions[state.activeQ].answered = true
             state.questions[state.activeQ].chosenOption = option
+        },
+        setRenderTime(state, qnumber){
+            if(state.questions[qnumber].renderTime === null){
+                state.questions[qnumber].renderTime = Date.now()
+                console.log(`render time set for ${qnumber} as `, state.questions[qnumber].renderTime)
+            }
+        },
+        setResponseTime(state, qnumber){
+            if(state.questions[qnumber].responseTime === null){
+                state.questions[qnumber].responseTime = Date.now()
+                console.log(`response time set for ${qnumber} as`, state.questions[qnumber].responseTime)
+            }
+            //if renderTime and responseTime both exixts, calculate differenceInterval
+            if(state.questions[qnumber].renderTime !== null && state.questions[qnumber].responseTime){
+                state.questions[qnumber].differenceInterval = state.questions[qnumber].responseTime - state.questions[qnumber].renderTime
+            }
+        },
+        lockQuestion(state, qnumber){
+            if(qnumber !== null){
+                state.questions[qnumber].locked = true
+                console.log("locked", qnumber)
+            }
         }
     },
     getters: {
         isFetched(state){
             return state.dataFetched
+        },
+        getQuestionCount(state){
+            console.log(state.questions.length, "number of Q")
+            return state.questions.length
         },
         getQuestion(state){
             console.log("getQuestion getter called")
@@ -137,6 +169,9 @@ const store = createStore({
             else{
                 return -1
             }
+        },
+        isLocked(state){
+            return state.questions[state.activeQ].locked
         }
     }
 });

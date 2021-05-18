@@ -1,20 +1,34 @@
 <template>
     <div id="full-page" class="container-fluid"> 
         <div id="quiz-row" class="row">
-            <div id="left-body" class="col-9">
+            <div id="left-body" class="col">
                 <qarea></qarea>
                 <question-action></question-action>
             </div>
-            <div id="right-body" class="col-3">
+            <!-- <div id="right-body" class="col-2">
                 <nav-panel></nav-panel>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    watch: {
+        '$store.state.activeQ'(newActive, oldActive){
+            
+            //update the render and response time for the question
+            if(oldActive !== null){
+                this.$store.commit('setResponseTime', oldActive)
+            }
+            if(newActive !== null){
+                this.$store.commit('setRenderTime', newActive)
+            }
 
+            //lock the question
+            this.$store.commit('lockQuestion', oldActive)
+        }
+    }
 }
 </script>
 

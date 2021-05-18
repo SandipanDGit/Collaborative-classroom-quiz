@@ -11,11 +11,7 @@
                 </ul>
             </div>
         </div>
-        <!-- <div id="form" class="container form-group d-flex justify-content-center align-items-center">
-            <label for="end-time" class="h5">Set finishing time</label>
-            <input type="time" name="end-time" id="end-time">
-            <button id="confirm-button" class="btn btn-secondary">Save</button>
-        </div> -->
+    
         <router-link to="/quiz">
             <button id="launch-button" class="btn btn-secondary">LAUNCH</button>
         </router-link>
@@ -28,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .container-fluid{
         display: flex;
         flex-direction: column;

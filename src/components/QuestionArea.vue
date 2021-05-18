@@ -35,6 +35,9 @@
                 userInput: -1
             }
         },
+        created(){
+            this.$store.commit('setInitialActive')
+        },
         methods: {
             updateChosenOption: function(option){
                 console.log(option, "chosen")
@@ -93,7 +96,7 @@
                 }
             },
 
-            getCorrectPosition: function(){
+            getCorrectPosition: function(){     //position of correct option in array
                 //check if data is available, if not return empty string
                 //it will update when dependencies change i.e. data becomes available
 
