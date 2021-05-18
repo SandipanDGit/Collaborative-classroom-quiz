@@ -30,6 +30,14 @@ const router = createRouter({
     ]
 })
 
+router.beforeEach((to, from, next)=>{
+    if(from.path == "/feedback"){
+        if(to.path == "/" || to.path == "/quiz"){
+            next(false)
+        }
+    }
+    next()
+})
 
 const store = createStore({
     /*  all the data lives here
@@ -59,7 +67,7 @@ const store = createStore({
                     let q = {
                         qStatement: "",
                         answers: [],
-                        correctPosition: 0,
+                        correctPosition: -1,
                         answered: false,
                         chosenOption: -1,
                         locked: false,
@@ -172,7 +180,31 @@ const store = createStore({
         },
         isLocked(state){
             return state.questions[state.activeQ].locked
-        }
+        },
+        getTotalQuestions(state){
+            return state.questions.length
+        },
+        getAttempts(state){
+            let count = 0
+            state.questions.forEach(q => {
+                if(q.answered) count++
+            })
+            return count
+        },
+        getMissed(state){
+            let count = 0
+            state.questions.forEach(q => {
+                if(!q.answered) count++
+            })
+            return count
+        },
+        getCorrectAttempts(state){
+            let count = 0
+            state.questions.forEach(q => {
+                if(q.correctPosition + 1 == q.chosenOption) count++
+            })
+            return count
+        },
     }
 });
  

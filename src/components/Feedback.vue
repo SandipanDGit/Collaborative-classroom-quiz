@@ -13,14 +13,6 @@ export default {
   components: {
     'quiz-stats': QuizStats,
     'question-stats': QuestionStats
-}
+  }
 }
 </script>
-
-<style scoped>
-    .row{
-        border: 1px solid gray;
-        border-radius: 10px;
-        padding: 30px;
-    }
-</style>

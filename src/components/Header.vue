@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style>     /*  cant make this scoped. it breaks the UI*/
+<style scoped>     /*  cant make this scoped. it breaks the UI*/
     #header{   
         display: flex;
         align-items: center;  
@@ -103,7 +103,8 @@ export default {
         font-weight: bold;
     }
     #title{
-        padding-left: 20px
+        padding-left: 20px;
+        color: white;
     }
     .row{
         margin: 0;  /* to prevent page overflow in X axis */

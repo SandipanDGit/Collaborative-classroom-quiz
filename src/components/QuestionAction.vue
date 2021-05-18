@@ -1,8 +1,8 @@
 <template>
     <div id="qaction-wrap" class="container-fluid">
         <div class="row">
-            <div class="btn btn-info" @click="updateActive(-1)">Previous</div>
-            <div class="btn btn-info" @click="updateActive(1)">Next</div>
+            <!-- <div class="btn btn-info" @click="updateActive(-1)">Previous</div> -->
+            <div class="btn btn-info" @click="updateActive(1)">Save and Next</div>
         </div>
     </div>
 </template>
@@ -36,10 +36,10 @@ export default {
 }
 .btn{
     background-color: #563D7C;
-    width: 150px;
+    min-width: 150px;
     margin: 0 10px 0 10px;
     font-size: 1.3rem;
     /* font-weight: bold; */
-    color: lightgray;
+    color: white;
 }
 </style>
